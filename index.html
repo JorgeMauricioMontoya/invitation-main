@@ -26,11 +26,80 @@
       <div class="row invitation__row">
         
         <div class="col invitation__row-col invitation__title-col">
-          <h1 class="invitation__title">Invitación a <br>My Birthday :D</h1>
+          <h1 class="invitation__title">Invitación a <br>My Birthday :D <br> Hora Local: <span id="demo"></span><br><span id="days"></span> días / <span id="hours"></span> horas / <span id="minutes"></span> minutos / <span id="seconds"></span> segundos</h1>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { 
+
+      //===
+      // VARIABLES
+      //===
+      const DATE_TARGET = new Date('08/23/2024 0:01 AM');
+      // DOM for render
+      const SPAN_DAYS = document.querySelector('span#days');
+      const SPAN_HOURS = document.querySelector('span#hours');
+      const SPAN_MINUTES = document.querySelector('span#minutes');
+      const SPAN_SECONDS = document.querySelector('span#seconds');
+      // Milliseconds for the calculations
+      const MILLISECONDS_OF_A_SECOND = 1000;
+      const MILLISECONDS_OF_A_MINUTE = MILLISECONDS_OF_A_SECOND * 60;
+      const MILLISECONDS_OF_A_HOUR = MILLISECONDS_OF_A_MINUTE * 60;
+      const MILLISECONDS_OF_A_DAY = MILLISECONDS_OF_A_HOUR * 24
+
+      //===
+      // FUNCTIONS
+      //===
+
+      /**
+      * Method that updates the countdown and the sample
+      */
+      function updateCountdown() {
+          // Calcs
+          const NOW = new Date()
+          const DURATION = DATE_TARGET - NOW;
+          const REMAINING_DAYS = Math.floor(DURATION / MILLISECONDS_OF_A_DAY);
+          const REMAINING_HOURS = Math.floor((DURATION % MILLISECONDS_OF_A_DAY) / MILLISECONDS_OF_A_HOUR);
+          const REMAINING_MINUTES = Math.floor((DURATION % MILLISECONDS_OF_A_HOUR) / MILLISECONDS_OF_A_MINUTE);
+          const REMAINING_SECONDS = Math.floor((DURATION % MILLISECONDS_OF_A_MINUTE) / MILLISECONDS_OF_A_SECOND);
+          // Thanks Pablo Monteserín (https://pablomonteserin.com/cuenta-regresiva/)
+
+          // Render
+          SPAN_DAYS.textContent = REMAINING_DAYS;
+          SPAN_HOURS.textContent = REMAINING_HOURS;
+          SPAN_MINUTES.textContent = REMAINING_MINUTES;
+          SPAN_SECONDS.textContent = REMAINING_SECONDS;
+      }
+
+      //===
+      // INIT
+      //===
+      updateCountdown();
+      // Refresh every second
+      setInterval(updateCountdown, MILLISECONDS_OF_A_SECOND);
+  });
+  </script>
+          <script type="text/javascript">       
+            let b;
+            let date;
+            let time;
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };   
+             setInterval(() => {
+               b = new Date();
+               date = b.toLocaleDateString(undefined, options);
+               time = b.toLocaleTimeString(); 
+               document.getElementById("demo").innerHTML = " " + time + "<br> on " + date;
+              }, 1000);
+           const bgcolor = (id) => {
+             document.body.style.background = document.getElementById(id).innerHTML;
+             }
+           </script>
+           
         </div><!-- end .invitation__title-col -->
         
         <div class="col invitation__row-col invitation__link-col">
+          
           <a class="invitation__link flex_cc" href="https://docs.google.com/forms/d/e/1FAIpQLSfNY9NKNCvo5j03Yu5K0sBbcZHdRQAusWg4OG_RKoIYZopdvA/viewform?usp=sf_link">Click para confirmar asistencia</a>
+          
         </div><!-- end .invitation__link-col -->
         
       </div><!-- end .invitation__row -->
